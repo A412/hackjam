@@ -18,7 +18,11 @@ public class Problem {
   }
 
   public boolean checkAnswer(Number ans) {
-    return (answer == ans.intValue());
+    try {
+      return checkAnswer(ans.intValue());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException();
+    }
   }
 
   public boolean checkAnswer(int ans) {
