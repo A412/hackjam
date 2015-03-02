@@ -30,18 +30,22 @@ public class GameActivity extends ActionBarActivity {
         tpl = new TimedProblemList(10);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-                getAnswer(answer);
-                score.setText(Integer.toString(tpl.score()));
+                if (getAnswer(answer)) {
+                    answer.setText("");
+                }
+                score.setText(tpl.getProblem().toString());
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
     }
 
-    public void getAnswer(EditText answer){
+    public boolean getAnswer(EditText answer){
         try {
-            tpl.check(answer.getText().toString());
-        } catch (NullPointerException e) {}
+            return tpl.check(answer.getText().toString());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
