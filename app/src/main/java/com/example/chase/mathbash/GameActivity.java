@@ -44,14 +44,13 @@ public class GameActivity extends ActionBarActivity {
                 problem.setText(tpl.getProblem().toString());
                 h.postDelayed(this, 1000);
             }
-        }, 1000);
+        }, 0);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {
                     scoreInt += 10;
                     score.setText("Score: " + scoreInt);
                     answer.setText("");
-                    problem.setText(tpl.getProblem().toString().split(",")[0]);
                 }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
