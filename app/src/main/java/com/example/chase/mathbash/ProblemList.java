@@ -15,6 +15,7 @@ public class ProblemList implements Iterable<Problem>{
 
   public ProblemList(int max) {
     problems = new ArrayList<Problem>();
+    addProblem();
     maxProblems = max;
     completedProblems = 0;
     score = 0;
