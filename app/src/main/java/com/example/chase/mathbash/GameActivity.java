@@ -14,6 +14,8 @@ import android.R.*;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class GameActivity extends ActionBarActivity {
 
@@ -22,6 +24,7 @@ public class GameActivity extends ActionBarActivity {
     private TextView score;
     private TextView problem;
     private int scoreInt;
+    private ArrayList<TextView> problemShapes;
 
 
     @Override
@@ -34,7 +37,7 @@ public class GameActivity extends ActionBarActivity {
         problem= (TextView) findViewById(R.id.problem);
 
         tpl = new TimedProblemList(10);
-        problem.setText(tpl.getProblem().toString());
+        problem.setText(tpl.getProblem().toString().split(",")[0]);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
 
@@ -57,6 +60,7 @@ public class GameActivity extends ActionBarActivity {
             return false;
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
