@@ -5,5 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_game">Math Bash</string>
     <integer name="answer">0</integer>
+    <string name="score">Score: </string>
+    <integer name="scoreNum">100</integer>
+    <string name="topMessage">Math Problems!</string>
 
 </resources>
