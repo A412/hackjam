@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 public class GameActivity extends ActionBarActivity {
 
+    private TimedProblemList tpl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,19 +25,17 @@ public class GameActivity extends ActionBarActivity {
         answer.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    v.getAnswer(answer);
                     return true;
                 }
                 return false;
             }
         });
+        tpl = new TimedProblemList(10);
     }
 
     public void getAnswer(EditText answer){
-
+        tpl.check(answer.getText().toString());
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
