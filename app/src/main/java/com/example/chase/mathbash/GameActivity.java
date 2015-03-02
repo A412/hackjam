@@ -2,19 +2,16 @@ package com.example.chase.mathbash;
 
 import android.text.TextWatcher;
 import android.text.Editable;
-import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.R.*;
-
 
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -24,7 +21,6 @@ public class GameActivity extends ActionBarActivity {
     private TextView score;
     private TextView problem;
     private int scoreInt;
-    private ArrayList<TextView> problemShapes;
 
 
     @Override
@@ -34,13 +30,22 @@ public class GameActivity extends ActionBarActivity {
 
         answer = (EditText) findViewById(R.id.answer);
         score = (TextView) findViewById(R.id.score);
-        problem= (TextView) findViewById(R.id.problem);
+        problem = (TextView) findViewById(R.id.problem);
 
         tpl = new TimedProblemList(10);
-        problem.setText(tpl.getProblem().toString().split(",")[0]);
+        problem.setText(tpl.getProblem().toString());
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        problem.setText(tpl.getProblem().toString());
+                    }
+                });
+            }
+        }, 0, 1000);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-
                 if (getAnswer(answer)) {
                     scoreInt += 10;
                     score.setText("Score: " + scoreInt);
@@ -60,7 +65,6 @@ public class GameActivity extends ActionBarActivity {
             return false;
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
