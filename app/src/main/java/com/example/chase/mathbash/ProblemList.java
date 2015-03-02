@@ -76,8 +76,8 @@ public class ProblemList implements Iterable<Problem>{
     }
   }
 
-  public Problem getProblem() {
-      return problems.get(0);
+  public Problem getProblem(int i) {
+      return problems.get(i);
   }
 
   public String getProblemsAsString() {
