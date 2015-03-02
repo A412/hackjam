@@ -37,28 +37,37 @@ public class ProblemList implements Iterable<Problem>{
   private void onCorrectAnswer() {
     completedProblems += 1;
     score += (int)(50 * Math.random());
-    addProblem();
-    if (problems.size() < maxProblems) {
-      addProblem();
-    }
   }
 
   public void addProblem() {
     problems.add(Problem.generate());
   }
 
-  public void check(int ans) {
+  public void addProblem(Problem p) {
+      problems.add(p);
+  }
+
+  public boolean check(int ans) {
+    boolean correct = false;
     for (int i = 0; i < problems.size(); i++) {
         if (problems.get(i).checkAnswer(ans)) {
             problems.remove(i);
             onCorrectAnswer();
+            correct = true;
         }
     }
+    if (problems.size() < maxProblems()) {
+        addProblem();
+    }
+    if (problems.size() < maxProblems()) {
+        addProblem();
+    }
+    return correct;
   }
 
-  public void check(String ans) {
+  public boolean check(String ans) {
     try {
-      check(Integer.parseInt(ans));
+      return(check(Integer.parseInt(ans)));
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException();
     }
