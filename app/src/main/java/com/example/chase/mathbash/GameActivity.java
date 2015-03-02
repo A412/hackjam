@@ -18,6 +18,7 @@ public class GameActivity extends ActionBarActivity {
 
     private TimedProblemList tpl;
     private EditText answer;
+    private TextView score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +26,16 @@ public class GameActivity extends ActionBarActivity {
         setContentView(R.layout.activity_game);
 
         answer = (EditText) findViewById(R.id.answer);
+        score = (TextView) findViewById(R.id.scoreNum);
+        tpl = new TimedProblemList(10);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 getAnswer(answer);
+                score.setText(Integer.toString(tpl.score()));
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
-        tpl = new TimedProblemList(10);
     }
 
     public void getAnswer(EditText answer){
