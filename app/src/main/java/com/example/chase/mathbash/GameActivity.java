@@ -70,7 +70,8 @@ public class GameActivity extends ActionBarActivity {
 
 
     public void drawProblem(TimedProblemList tpl){
-        for (TimedProblem tp : tpl) {
+        for (Problem p : tpl) {
+            TimedProblem tp = (TimedProblem)p;
             String prob = tp.toString().split(",")[0];
             Double position = tp.life();
             Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
