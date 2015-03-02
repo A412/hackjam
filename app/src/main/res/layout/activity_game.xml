@@ -15,7 +15,6 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/answer"
-        android:hint="@integer/answer"
         android:imeOptions="actionDone"
 
         android:layout_marginTop="100dp" />
@@ -40,6 +39,13 @@
         android:gravity="top|right"
         android:layout_marginTop="80dp"
         />
+    
+    <Button
+        android:layout_width=""
+        android:layout_height=""
+        android:layout_below="@+id/answer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
