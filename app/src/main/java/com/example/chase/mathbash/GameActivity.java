@@ -20,6 +20,8 @@ public class GameActivity extends ActionBarActivity {
     private TimedProblemList tpl;
     private EditText answer;
     private TextView score;
+    private TextView problem;
+    private TextView life;
     private int scoreInt;
 
 
@@ -30,15 +32,19 @@ public class GameActivity extends ActionBarActivity {
 
         answer = (EditText) findViewById(R.id.answer);
         score = (TextView) findViewById(R.id.score);
+        problem= (TextView) findViewById(R.id.problem);
+
         tpl = new TimedProblemList(10);
+        problem.setText(tpl.getProblem().toString());
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+
                 if (getAnswer(answer)) {
-                    scoreInt+=10;
-                    score.setText("Score: "+ scoreInt);
+                    scoreInt += 10;
+                    score.setText("Score: " + scoreInt);
                     answer.setText("");
+                    problem.setText(tpl.getProblem().toString());
                 }
-                //scoreDisplay.setText(tpl.getProblem().toString());
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
             public void onTextChanged(CharSequence s, int start, int before, int count){}
