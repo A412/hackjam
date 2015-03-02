@@ -2,23 +2,30 @@ package com.example.chase.mathbash;
 
 import android.text.TextWatcher;
 import android.text.Editable;
-import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameActivity extends ActionBarActivity {
 
     private TimedProblemList tpl;
     private EditText answer;
     private TextView score;
+
+    private void update() {
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                tpl.decrementAll(0.05);
+                score.setText(tpl.getProblem().toString());
+            }
+        },0,1000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,7 @@ public class GameActivity extends ActionBarActivity {
         answer = (EditText) findViewById(R.id.answer);
         score = (TextView) findViewById(R.id.scoreNum);
         tpl = new TimedProblemList(10);
+        update();
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {
