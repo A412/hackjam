@@ -38,6 +38,7 @@ public class GameActivity extends ActionBarActivity {
                     score.setText("Score: "+ scoreInt);
                     answer.setText("");
                 }
+
                 //scoreDisplay.setText(tpl.getProblem().toString());
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
