@@ -21,7 +21,6 @@ public class GameActivity extends ActionBarActivity {
     private EditText answer;
     private TextView score;
     private TextView problem;
-    private TextView life;
     private int scoreInt;
 
 
@@ -43,7 +42,7 @@ public class GameActivity extends ActionBarActivity {
                     scoreInt += 10;
                     score.setText("Score: " + scoreInt);
                     answer.setText("");
-                    problem.setText(tpl.getProblem().toString());
+                    problem.setText(tpl.getProblem().toString().split(",")[0]);
                 }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
