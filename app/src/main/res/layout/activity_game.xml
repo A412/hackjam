@@ -16,10 +16,8 @@
         android:ems="10"
         android:id="@+id/answer"
         android:hint="@integer/answer"
-        android:gravity="center|center_horizontal"
-        android:layout_below="@+id/score"
-        android:imeOptions="actionSend"
-        android:layout_centerHorizontal="true"
+        android:imeOptions="actionDone"
+
         android:layout_marginTop="100dp" />
 
     <TextView
@@ -41,18 +39,7 @@
         android:id="@+id/scoreNum"
         android:gravity="top|right"
         android:layout_marginTop="80dp"
-        android:layout_below="@+id/topMessage"
-        android:layout_toLeftOf="@+id/topMessage"
-        android:layout_toStartOf="@+id/topMessage" />
+        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/topMessage"
-        android:id="@+id/topMessage"
-        android:gravity="top"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/answer"
-        android:layout_alignEnd="@+id/answer" />
+
 </RelativeLayout>

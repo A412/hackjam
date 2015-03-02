@@ -1,9 +1,15 @@
 package com.example.chase.mathbash;
 
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -12,8 +18,22 @@ public class GameActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        EditText answer = (EditText) findViewById(R.id.answer);
+        answer.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    v.getAnswer(answer);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
+    public void getAnswer(EditText answer){
+
+    }
 
 
 
