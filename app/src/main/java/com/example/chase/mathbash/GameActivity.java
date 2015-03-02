@@ -40,9 +40,9 @@ public class GameActivity extends ActionBarActivity {
         h.postDelayed( new Runnable() {
             @Override
             public void run() {
-                tpl.decrementAll(0.05);
+                tpl.decrementAll(0.003);
                 problem.setText(tpl.getProblem().toString());
-                h.postDelayed(this, 1000);
+                h.postDelayed(this, 100);
             }
         }, 0);
         answer.addTextChangedListener(new TextWatcher() {
