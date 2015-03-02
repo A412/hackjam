@@ -3,7 +3,7 @@ package com.example.chase.mathbash;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ProblemList {
+public class ProblemList implements Iterable<Problem>{
   private ArrayList<Problem> problems;
   private int maxProblems;
   private int completedProblems;
@@ -36,23 +36,23 @@ public class ProblemList {
 
   private void onCorrectAnswer() {
     completedProblems += 1;
+    score += (int)(50 * Math.random());
     addProblem();
     if (problems.size() < maxProblems) {
       addProblem();
     }
   }
 
-  private void addProblem() {
+  public void addProblem() {
     problems.add(Problem.generate());
   }
 
   public void check(int ans) {
-    Iterator<Problem> it = problems.iterator();
-    while (it.hasNext()) {
-      if (it.next().checkAnswer(ans)) {
-        it.remove();
-        onCorrectAnswer();
-      }
+    for (int i = 0; i < problems.size(); i++) {
+        if (problems.get(i).checkAnswer(ans)) {
+            problems.remove(i);
+            onCorrectAnswer();
+        }
     }
   }
 
@@ -62,6 +62,14 @@ public class ProblemList {
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException();
     }
+  }
+
+  public Problem getProblem() {
+      return problems.get(0);
+  }
+
+  public Iterator<Problem> iterator() {
+      return problems.iterator();
   }
 
 }
