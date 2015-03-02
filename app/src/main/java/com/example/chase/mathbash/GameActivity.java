@@ -36,7 +36,9 @@ public class GameActivity extends ActionBarActivity {
     }
 
     public void getAnswer(EditText answer){
-        tpl.check(answer.getText().toString());
+        try {
+            tpl.check(answer.getText().toString());
+        } catch (NullPointerException e) {}
     }
 
     @Override
