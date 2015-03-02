@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
+import android.R.*;
+
+
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class GameActivity extends ActionBarActivity {
     private TimedProblemList tpl;
     private EditText answer;
     private TextView score;
+    private int scoreInt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +29,16 @@ public class GameActivity extends ActionBarActivity {
         setContentView(R.layout.activity_game);
 
         answer = (EditText) findViewById(R.id.answer);
-        score = (TextView) findViewById(R.id.scoreNum);
+        score = (TextView) findViewById(R.id.score);
         tpl = new TimedProblemList(10);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {
+                    scoreInt+=10;
+                    score.setText("Score: "+ scoreInt);
                     answer.setText("");
                 }
-                score.setText(tpl.getProblem().toString());
+                //scoreDisplay.setText(tpl.getProblem().toString());
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
             public void onTextChanged(CharSequence s, int start, int before, int count){}
