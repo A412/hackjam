@@ -41,7 +41,7 @@ public class GameActivity extends ActionBarActivity {
             @Override
             public void run() {
                 tpl.decrementAll(0.003);
-                problem.setText(tpl.getProblem().toString());
+                problem.setText(tpl.getProblemsAsString());
                 h.postDelayed(this, 100);
             }
         }, 0);

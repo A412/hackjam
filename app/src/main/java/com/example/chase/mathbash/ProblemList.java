@@ -80,6 +80,15 @@ public class ProblemList implements Iterable<Problem>{
       return problems.get(0);
   }
 
+  public String getProblemsAsString() {
+      StringBuffer total = new StringBuffer();
+      for (Problem p : problems) {
+          total.append(p.toString());
+          total.append("\n");
+      }
+      return total.toString();
+  }
+
   public Iterator<Problem> iterator() {
       return problems.iterator();
   }
