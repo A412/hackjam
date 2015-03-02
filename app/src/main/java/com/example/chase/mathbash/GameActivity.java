@@ -33,7 +33,7 @@ public class GameActivity extends ActionBarActivity {
         problem = (TextView) findViewById(R.id.problem);
 
         tpl = new TimedProblemList(10);
-        problem.setText(tpl.getProblem().toString());
+        problem.setText(tpl.getProblem().toString().split(",")[0]);
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {

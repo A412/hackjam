@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:hint="@integer/answer"
         android:id="@+id/answer"
         android:layout_marginTop="100dp" />
 
