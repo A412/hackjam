@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+import android.os.Handler;
 
 public class GameActivity extends ActionBarActivity {
 
@@ -34,16 +34,16 @@ public class GameActivity extends ActionBarActivity {
 
         tpl = new TimedProblemList(10);
         problem.setText(tpl.getProblem().toString());
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
+
+        final Handler h = new Handler();
+        h.postDelayed( new Runnable() {
+            @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        problem.setText(tpl.getProblem().toString());
-                    }
-                });
+                tpl.decrementAll(0.05);
+                problem.setText(tpl.getProblem().toString());
+                h.postDelayed(this, 1000);
             }
-        }, 0, 1000);
+        }, 1000);
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {

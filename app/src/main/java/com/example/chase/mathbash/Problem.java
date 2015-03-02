@@ -32,8 +32,8 @@ public class Problem {
   public static Problem generate() {
     String operation;
     int ans;
-    int first = (int)(50 * Math.random());
-    int second = (int)(50 * Math.random());
+    int first = (int)(10 * Math.random());
+    int second = (int)(10 * Math.random());
     if (Math.random() > 0.5) {
       operation = " + ";
       ans = first + second;
