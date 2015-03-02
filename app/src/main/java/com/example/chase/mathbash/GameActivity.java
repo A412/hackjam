@@ -4,9 +4,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -16,18 +13,6 @@ public class GameActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
     }
-
-    EditText editText = (EditText) findViewById(R.id.answer);
-    editText.setOnEditorActionListener(new OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
-                sendMessage();
-                handled = true;
-            }
-            return handled;
-        }
 
 
 
