@@ -1,5 +1,7 @@
 package com.example.chase.mathbash;
 
+import android.text.TextWatcher;
+import android.text.Editable;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,20 +17,20 @@ import android.widget.TextView;
 public class GameActivity extends ActionBarActivity {
 
     private TimedProblemList tpl;
+    private EditText answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        EditText answer = (EditText) findViewById(R.id.answer);
-        answer.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    return true;
-                }
-                return false;
+        answer = (EditText) findViewById(R.id.answer);
+        answer.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                getAnswer(answer);
             }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+            public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
         tpl = new TimedProblemList(10);
     }
