@@ -1,5 +1,6 @@
 package com.example.chase.mathbash;
 
+import android.graphics.drawable.Drawable;
 import android.text.TextWatcher;
 import android.text.Editable;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
+import android.R.*;
 
 
 public class GameActivity extends ActionBarActivity {
@@ -66,6 +68,17 @@ public class GameActivity extends ActionBarActivity {
         }
     }
 
+
+    public void drawProblem(TimedProblemList tpl){
+        for (TimedProblem tp : tpl) {
+            String prob = tp.toString().split(",")[0];
+            Double position = tp.life();
+            Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
+            problem = (TextView) findViewById(R.id.problem);
+            problem.setText(prob);
+            problem.setBackground(shape);
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

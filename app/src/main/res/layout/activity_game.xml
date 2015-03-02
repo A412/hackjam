@@ -32,10 +32,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/problem"
+        android:background="@drawable/gradient_box"
         android:id="@+id/problem"
         android:layout_marginTop="40dip"
         android:gravity="top|center"
         />
+
 
     
 
