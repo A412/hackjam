@@ -35,7 +35,7 @@ public class GameActivity extends ActionBarActivity {
     private int width;
     private int height;
 
-    private final int MAX_PROBLEMS = 5; //Maximum problems on screen
+    private final int MAX_PROBLEMS = 3; //Maximum problems on screen
     private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
     private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
     private final int PROBLEM_DELAY = 1000; //Time between problem creation, in milliseconds
@@ -61,7 +61,7 @@ public class GameActivity extends ActionBarActivity {
         score = (TextView) findViewById(R.id.score);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
-        //problem.setText(tpl.getProblem().toString());
+        drawAllProblems(tpl);
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
