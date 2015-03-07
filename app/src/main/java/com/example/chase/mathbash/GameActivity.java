@@ -2,12 +2,15 @@ package com.example.chase.mathbash;
 
 import android.annotation.TargetApi;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextWatcher;
 import android.text.Editable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,6 +30,10 @@ public class GameActivity extends ActionBarActivity {
     private TextView score;
     private TextView problem;
     private int scoreInt;
+
+
+
+
 
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
     private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
