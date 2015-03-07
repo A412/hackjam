@@ -50,6 +50,10 @@ public class ProblemList implements Iterable<Problem>{
     problems.add(p);
   }
 
+  public void setProblem(int index, Problem p){
+    problems.set(index, p);
+  }
+
   public boolean addProblem(int max) {
     if (problems.size() < max) {
         addProblem();
@@ -68,6 +72,10 @@ public class ProblemList implements Iterable<Problem>{
         }
     }
     return correct;
+  }
+
+  public void remove(int i){
+      problems.remove(i);
   }
 
   public boolean check(String ans) {

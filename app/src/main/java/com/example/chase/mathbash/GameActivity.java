@@ -2,8 +2,10 @@ package com.example.chase.mathbash;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextWatcher;
@@ -15,6 +17,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,7 +32,7 @@ public class GameActivity extends ActionBarActivity {
     private LocationTimedProblemList tpl;
     private EditText answer;
     private TextView score;
-    private ProgressBar lifeForce;
+    private HealthBar healthBar;
     private int health;
     private int scoreInt;
     private int width;
@@ -64,14 +67,19 @@ public class GameActivity extends ActionBarActivity {
 
         answer.setY(ANSWER_YPOS);
         health=100;
-
+        healthBar=new HealthBar(this, height, width);
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         tpl.addProblem(MAX_PROBLEMS);
 
         problems = new TextView[MAX_PROBLEMS];
         for (int i = 0; i < problems.length; i++) {
             problems[i] = (TextView) findViewById(problemIds[i]);
+            problems[i].setVisibility(View.INVISIBLE);
+
         }
+
+
+
 
 
         final Handler h = new Handler();
@@ -81,8 +89,9 @@ public class GameActivity extends ActionBarActivity {
             @Override
             public void run() {
                 tpl.decrementAll((double)(TIMER_INTERVAL) / PROBLEM_LIFETIME);
-                //updateProblems(tpl);
+                LocationTimedProblemList.updateProblems(tpl);
                 drawAllProblems(tpl);
+                healthBar.invalidate();
                 count += TIMER_INTERVAL;
                 if (count >= PROBLEM_DELAY && tpl.addProblem(MAX_PROBLEMS)) {
                     count = 0;
@@ -93,6 +102,7 @@ public class GameActivity extends ActionBarActivity {
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {
+                    incrementHealth();
                     answer.setText("");
                     scoreInt += PROBLEM_SCORE_MINIMUM;
                     score.setText("Score: " + scoreInt);
@@ -112,6 +122,12 @@ public class GameActivity extends ActionBarActivity {
         }
     }
 
+
+    public void endGame(){
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
+    }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawAllProblems(LocationTimedProblemList tpl){
         int count=0;
@@ -120,22 +136,27 @@ public class GameActivity extends ActionBarActivity {
             drawProblem(tp, count);
             count+=1;
         }
+        LocationTimedProblemList.updateProblems(tpl);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void drawProblem(LocationTimedProblem prob, int count){
+    public boolean drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
         float ypos=(float)(height-(float)(height * prob.life()));
-        if (ypos>=ANSWER_YPOS){
-            health-=10;
-            //remove the Location
-            return;
-        }
         problems[count].setText(p);
         problems[count].setBackground(shape);
+        problems[count].setVisibility(View.VISIBLE);
         problems[count].setX((float)((prob.getX() + 0.5) * width/7.0));
         problems[count].setY((height-(float)(height * prob.life())));
+
+        if (ypos>=ANSWER_YPOS){
+            decrementHealth();
+            prob=tpl.removeReplace(count);
+            drawProblem(prob, count);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -143,6 +164,21 @@ public class GameActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_game, menu);
         return true;
+    }
+
+    public void decrementHealth(){
+        health-=10;
+        if (health<=0){
+            endGame();
+        }
+        healthBar.setHealth(health);
+    }
+
+    public void incrementHealth() {
+        if (health < 100) {
+            health += 1;
+            healthBar.setHealth(health);
+        }
     }
 
     @Override
@@ -158,5 +194,10 @@ public class GameActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void drawHealth(){
+        float life=(float)(health)/100;
+
     }
 }
