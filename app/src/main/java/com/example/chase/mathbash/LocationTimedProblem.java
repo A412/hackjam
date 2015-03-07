@@ -15,7 +15,7 @@ public class LocationTimedProblem extends TimedProblem {
 
     public LocationTimedProblem(String q, int a, double initLife) {
         super(q, a, initLife);
-        x = (int)(5*Math.random());
+        x = (int)(4*Math.random())+1;
         y = 100;
     }
 

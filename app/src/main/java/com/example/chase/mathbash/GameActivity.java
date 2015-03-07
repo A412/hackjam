@@ -110,15 +110,16 @@ public class GameActivity extends ActionBarActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void drawProblem(LocationTimedProblem prob){
+    public void drawProblem(LocationTimedProblem prob, String id){
         String p = prob.toString().split(",")[0];
+        String findId="R.id."+ id;
         Double position = prob.life();
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
-        problem = (TextView) findViewById(R.id.problem);
+        problem = (TextView) findViewById();
         problem.setText(p);
         problem.setBackground(shape);
         problem.setX(width/prob.getX());
-        //problem.setY(heigh)
+        //problem.setY(height*prob.getY());
     }
 
     @Override
