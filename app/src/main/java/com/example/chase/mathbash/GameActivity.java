@@ -57,7 +57,7 @@ public class GameActivity extends ActionBarActivity {
 
         answer = (EditText) findViewById(R.id.answer);
 
-        answer.setY(height/3);
+        answer.setY(height/2);
         score = (TextView) findViewById(R.id.score);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
