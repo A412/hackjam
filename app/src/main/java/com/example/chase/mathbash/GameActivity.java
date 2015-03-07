@@ -85,9 +85,10 @@ public class GameActivity extends ActionBarActivity {
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {
+                    answer.setText("");
                     scoreInt += PROBLEM_SCORE_MINIMUM;
                     score.setText("Score: " + scoreInt);
-                    answer.setText("");
+
                 }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}

@@ -33,9 +33,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/problem1"
         android:id="@+id/problem1"
-        android:layout_marginTop="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
+        android:layout_marginTop="7dip"
+        android:layout_marginLeft="7dip"
+        android:layout_marginRight="7dip"
 
         />
 
@@ -46,9 +46,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/problem2"
         android:id="@+id/problem2"
-        android:layout_marginTop="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
+        android:layout_marginTop="7dip"
+        android:layout_marginLeft="7dip"
+        android:layout_marginRight="7dip"
 
         />
 
@@ -59,9 +59,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/problem3"
         android:id="@+id/problem3"
-        android:layout_marginTop="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
+        android:layout_marginTop="7dip"
+        android:layout_marginLeft="7dip"
+        android:layout_marginRight="7dip"
 
         />
 
@@ -72,9 +72,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/problem4"
         android:id="@+id/problem4"
-        android:layout_marginTop="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
+        android:layout_marginTop="7dip"
+        android:layout_marginLeft="7dip"
+        android:layout_marginRight="7dip"
 
         />
 
@@ -85,9 +85,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/problem5"
         android:id="@+id/problem5"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="4dip"
+        android:layout_marginLeft="7dip"
+        android:layout_marginRight="7dip"
+        android:layout_marginTop="7dip"
         />
 
 
