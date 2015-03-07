@@ -10,12 +10,12 @@ import android.text.TextWatcher;
 import android.text.Editable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.view.WindowManager;
+
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -40,7 +40,8 @@ public class GameActivity extends ActionBarActivity {
     private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
     private final int PROBLEM_DELAY = 1000; //Time between problem creation, in milliseconds
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
-
+    private int[] problemIds = {R.id.problem1, R.id.problem2,
+            R.id.problem3, R.id.problem4, R.id.problem5};
 
 
 
@@ -58,7 +59,6 @@ public class GameActivity extends ActionBarActivity {
 
         answer = (EditText) findViewById(R.id.answer);
         score = (TextView) findViewById(R.id.score);
-        problem = (TextView) findViewById(R.id.problem);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         //problem.setText(tpl.getProblem().toString());
@@ -103,19 +103,23 @@ public class GameActivity extends ActionBarActivity {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawAllProblems(LocationTimedProblemList tpl){
+        int count=0;
         for (Problem p : tpl) {
             LocationTimedProblem tp = (LocationTimedProblem)p;
-            drawProblem(tp);
+            if (count>=MAX_PROBLEMS){
+                continue;
+            }
+            drawProblem(tp, count);
+            count+=1;
         }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void drawProblem(LocationTimedProblem prob, String id){
+    public void drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
-        String findId="R.id."+ id;
         Double position = prob.life();
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
-        problem = (TextView) findViewById();
+        problem = (TextView) findViewById(problemIds[count]);
         problem.setText(p);
         problem.setBackground(shape);
         problem.setX(width/prob.getX());
