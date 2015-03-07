@@ -80,7 +80,7 @@ public class GameActivity extends ActionBarActivity {
 
 
 
-
+        healthBar.setHealth(health);
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
@@ -91,7 +91,7 @@ public class GameActivity extends ActionBarActivity {
                 tpl.decrementAll((double)(TIMER_INTERVAL) / PROBLEM_LIFETIME);
                 LocationTimedProblemList.updateProblems(tpl);
                 drawAllProblems(tpl);
-                healthBar.invalidate();
+
                 count += TIMER_INTERVAL;
                 if (count >= PROBLEM_DELAY && tpl.addProblem(MAX_PROBLEMS)) {
                     count = 0;

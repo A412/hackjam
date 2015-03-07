@@ -29,17 +29,18 @@ public class HealthBar extends View {
         public void onDraw(Canvas canvas) {
             paint.setColor(Color.BLACK);
             paint.setStrokeWidth(3);
-            canvas.drawRect(height, 0,width, 80, paint);
+            canvas.drawRect(8*height/9, 0,width, 80, paint);
             paint.setStrokeWidth(1);
             paint.setColor(Color.RED);
-            canvas.drawRect(height, 0, width, 80, paint );
+            canvas.drawRect(8*height/9, 0, width, 80, paint );
             paint.setColor(Color.GREEN);
-            canvas.drawRect(height ,0, (width*health)/100, 80, paint );
+            canvas.drawRect(8*height/9 ,0, (width*health)/100, 80, paint );
 
         }
 
     public void setHealth(int h){
         health=h;
+        invalidate();
     }
 
     }
