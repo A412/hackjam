@@ -1,19 +1,19 @@
 package com.example.chase.mathbash;
 
 public class LocationTimedProblem extends TimedProblem {
-    private int x;
+    private double x;
 
     public LocationTimedProblem(String q, int a){
         super(q, a);
-        x = (int)(5*Math.random()) + 1;
+        x = 5*Math.random();
     }
 
     public LocationTimedProblem(String q, int a, double initLife) {
         super(q, a, initLife);
-        x = (int)(5*Math.random()) + 1;
+        x = 5*Math.random();
     }
 
-    public int getX(){
+    public double getX(){
         return x;
     }
 

@@ -36,9 +36,9 @@ public class GameActivity extends ActionBarActivity {
     private int height;
 
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
-    private final int TIMER_INTERVAL = 33; //Time between updates in milliseconds
-    private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
-    private final int PROBLEM_DELAY = 150; //Time between problem creation, in milliseconds
+    private final int TIMER_INTERVAL = 20; //Time between updates in milliseconds
+    private final int PROBLEM_LIFETIME = 20000; //Time that problems are on screen, in milliseconds
+    private final int PROBLEM_DELAY = 350; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
@@ -84,9 +84,8 @@ public class GameActivity extends ActionBarActivity {
                 //updateProblems(tpl);
                 drawAllProblems(tpl);
                 count += TIMER_INTERVAL;
-                if (count > PROBLEM_DELAY) {
-                    tpl.addProblem(MAX_PROBLEMS);
-                    count=0;
+                if (count >= PROBLEM_DELAY && tpl.addProblem(MAX_PROBLEMS)) {
+                    count = 0;
                 }
                 h.postDelayed(this, TIMER_INTERVAL);
             }
@@ -135,8 +134,8 @@ public class GameActivity extends ActionBarActivity {
         }
         problems[count].setText(p);
         problems[count].setBackground(shape);
-        problems[count].setX((float)(prob.getX() * width * 1.2 / 5.0));
-        problems[count].setY(ypos);
+        problems[count].setX((float)((prob.getX() + 0.5) * width/7.0));
+        problems[count].setY((height-(float)(height * prob.life())));
     }
 
     @Override
