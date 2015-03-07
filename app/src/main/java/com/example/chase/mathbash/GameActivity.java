@@ -25,7 +25,7 @@ import android.R.*;
 
 public class GameActivity extends ActionBarActivity {
 
-    private TimedProblemList tpl;
+    private LocationTimedProblemList tpl;
     private EditText answer;
     private TextView score;
     private TextView problem;
@@ -49,7 +49,7 @@ public class GameActivity extends ActionBarActivity {
         score = (TextView) findViewById(R.id.score);
         problem = (TextView) findViewById(R.id.problem);
 
-        tpl = new TimedProblemList(10);
+        tpl = new LocationTimedProblemList(10);
         //problem.setText(tpl.getProblem().toString());
 
         final Handler h = new Handler();
@@ -61,7 +61,7 @@ public class GameActivity extends ActionBarActivity {
             @Override
             public void run() {
                 tpl.decrementAll(TIMER_INTERVAL / PROBLEM_LIFETIME);
-                drawProblem(tpl);
+                drawAllProblems(tpl);
                 count += TIMER_INTERVAL;
                 if (count > PROBLEM_DELAY) {
                     tpl.addProblem(MAX_PROBLEMS);
@@ -92,17 +92,22 @@ public class GameActivity extends ActionBarActivity {
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void drawProblem(TimedProblemList tpl){
+    public void drawAllProblems(LocationTimedProblemList tpl){
         for (Problem p : tpl) {
-            TimedProblem tp = (TimedProblem)p;
-            String prob = tp.toString().split(",")[0];
-            Double position = tp.life();
-            Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
-            problem = (TextView) findViewById(R.id.problem);
-            problem.setText(prob);
-            problem.setBackground(shape);
+            LocationTimedProblem tp = (LocationTimedProblem)p;
+            drawProblem(tp);
         }
     }
+
+    public void drawProblem(LocationTimedProblem prob){
+        String p = prob.toString().split(",")[0];
+        Double position = prob.life();
+        Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
+        problem = (TextView) findViewById(R.id.problem);
+        problem.setText(p);
+        problem.setBackground(shape);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
