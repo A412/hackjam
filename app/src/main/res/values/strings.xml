@@ -6,9 +6,9 @@
     <string name="title_activity_game">Math Bash</string>
     <integer name="answer">0</integer>
     <string name="score">Score: 0</string>
-    <string name="problem1">Here</string>
-    <string name="problem2">Here</string>
-    <string name="problem3">Here</string>
+    <string name="problem1">0</string>
+    <string name="problem2">0</string>
+    <string name="problem3">0</string>
     <string name="problem4">Here</string>
     <string name="problem5">Here</string>
 

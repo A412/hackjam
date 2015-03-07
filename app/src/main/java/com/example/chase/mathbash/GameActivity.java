@@ -106,9 +106,6 @@ public class GameActivity extends ActionBarActivity {
         int count=0;
         for (Problem p : tpl) {
             LocationTimedProblem tp = (LocationTimedProblem)p;
-            if (count>=MAX_PROBLEMS){
-                continue;
-            }
             drawProblem(tp, count);
             count+=1;
         }
