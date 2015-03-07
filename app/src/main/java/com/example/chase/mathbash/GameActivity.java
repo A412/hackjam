@@ -42,7 +42,7 @@ public class GameActivity extends ActionBarActivity {
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
-    private final int ANSWER_YPOS= height/3;
+    private int ANSWER_YPOS;
 
 
 
@@ -56,6 +56,7 @@ public class GameActivity extends ActionBarActivity {
         getWindowManager().getDefaultDisplay().getSize(windowSize);
         width = windowSize.x;
         height = windowSize.y;
+        ANSWER_YPOS=height/3;
 
         //lifeForce=(ProgressBar)findViewById(R.id.lifeForce);
         score = (TextView) findViewById(R.id.score);
