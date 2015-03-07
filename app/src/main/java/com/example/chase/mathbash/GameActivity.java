@@ -1,6 +1,7 @@
 package com.example.chase.mathbash;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,6 +32,8 @@ public class GameActivity extends ActionBarActivity {
     private TextView score;
     private TextView problem;
     private int scoreInt;
+    private int width;
+    private int height;
 
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
     private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
@@ -37,10 +41,20 @@ public class GameActivity extends ActionBarActivity {
     private final int PROBLEM_DELAY = 1000; //Time between problem creation, in milliseconds
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
 
+
+
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point origin=new Point();
+        display.getSize(origin);
+        width = origin.x;
+        height = origin.y;
 
         answer = (EditText) findViewById(R.id.answer);
         score = (TextView) findViewById(R.id.score);
@@ -95,6 +109,7 @@ public class GameActivity extends ActionBarActivity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawProblem(LocationTimedProblem prob){
         String p = prob.toString().split(",")[0];
         Double position = prob.life();
@@ -102,6 +117,8 @@ public class GameActivity extends ActionBarActivity {
         problem = (TextView) findViewById(R.id.problem);
         problem.setText(p);
         problem.setBackground(shape);
+        problem.setX(width/prob.getX());
+        //problem.setY(heigh)
     }
 
     @Override
