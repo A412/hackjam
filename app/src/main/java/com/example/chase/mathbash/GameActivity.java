@@ -15,7 +15,6 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,18 +23,11 @@ import java.util.TimerTask;
 import android.os.Handler;
 import android.R.*;
 
-
-
 public class GameActivity extends ActionBarActivity {
 
     private LocationTimedProblemList tpl;
     private EditText answer;
     private TextView score;
-    private TextView problem;
-    private TextView problem2;
-    private TextView problem3;
-    private TextView problem4;
-    private TextView problem5;
     private int scoreInt;
     private int width;
     private int height;
@@ -47,6 +39,7 @@ public class GameActivity extends ActionBarActivity {
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2,
             R.id.problem3, R.id.problem4, R.id.problem5};
+    private TextView[] problems;
 
 
 
@@ -68,6 +61,10 @@ public class GameActivity extends ActionBarActivity {
         score = (TextView) findViewById(R.id.score);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
+        problems = new TextView[MAX_PROBLEMS];
+        for (int i = 0; i < problems.length; i++) {
+            problems[i] = (TextView) findViewById(problemIds[i]);
+        }
 
 
         final Handler h = new Handler();
@@ -122,13 +119,12 @@ public class GameActivity extends ActionBarActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
-        Double position = (2.0/3.0)*(double)height/prob.life();
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
-        problem = (TextView) findViewById(problemIds[count]);
-        problem.setText(p);
-        problem.setBackground(shape);
-        problem.setX(width/prob.getX());
-        problem.setY( (float) (position + (height/3)));
+
+        problems[count].setText(p);
+        problems[count].setBackground(shape);
+        problems[count].setX(width/prob.getX());
+        problems[count].setY((float)(height * prob.life()));
     }
 
     @Override
