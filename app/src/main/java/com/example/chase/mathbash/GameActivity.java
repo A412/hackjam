@@ -31,6 +31,10 @@ public class GameActivity extends ActionBarActivity {
     private EditText answer;
     private TextView score;
     private TextView problem;
+    private TextView problem2;
+    private TextView problem3;
+    private TextView problem4;
+    private TextView problem5;
     private int scoreInt;
     private int width;
     private int height;
@@ -38,7 +42,7 @@ public class GameActivity extends ActionBarActivity {
     private final int MAX_PROBLEMS = 3; //Maximum problems on screen
     private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
     private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
-    private final int PROBLEM_DELAY = 1000; //Time between problem creation, in milliseconds
+    private final int PROBLEM_DELAY = 100; //Time between problem creation, in milliseconds
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2,
             R.id.problem3, R.id.problem4, R.id.problem5};
@@ -58,10 +62,12 @@ public class GameActivity extends ActionBarActivity {
         height = origin.y;
 
         answer = (EditText) findViewById(R.id.answer);
+
+        answer.setY(height/3);
         score = (TextView) findViewById(R.id.score);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
-        drawAllProblems(tpl);
+
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
@@ -76,6 +82,7 @@ public class GameActivity extends ActionBarActivity {
                 count += TIMER_INTERVAL;
                 if (count > PROBLEM_DELAY) {
                     tpl.addProblem(MAX_PROBLEMS);
+                    count=0;
                 }
                 h.postDelayed(this, TIMER_INTERVAL);
             }
@@ -120,7 +127,7 @@ public class GameActivity extends ActionBarActivity {
         problem.setText(p);
         problem.setBackground(shape);
         problem.setX(width/prob.getX());
-        //problem.setY(height*prob.getY());
+        problem.setY( (float)((2*height/3)*prob.life()));
     }
 
     @Override
