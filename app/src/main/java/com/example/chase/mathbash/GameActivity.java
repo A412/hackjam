@@ -31,14 +31,11 @@ public class GameActivity extends ActionBarActivity {
     private TextView problem;
     private int scoreInt;
 
-
-
-
-
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
     private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
     private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
     private final int PROBLEM_DELAY = 1000; //Time between problem creation, in milliseconds
+    private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,7 @@ public class GameActivity extends ActionBarActivity {
         score = (TextView) findViewById(R.id.score);
         problem = (TextView) findViewById(R.id.problem);
 
-        tpl = new LocationTimedProblemList(10);
+        tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         //problem.setText(tpl.getProblem().toString());
 
         final Handler h = new Handler();
@@ -72,7 +69,7 @@ public class GameActivity extends ActionBarActivity {
         answer.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (getAnswer(answer)) {
-                    scoreInt += 10;
+                    scoreInt += PROBLEM_SCORE_MINIMUM;
                     score.setText("Score: " + scoreInt);
                     answer.setText("");
                 }
@@ -89,7 +86,6 @@ public class GameActivity extends ActionBarActivity {
             return false;
         }
     }
-
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawAllProblems(LocationTimedProblemList tpl){
