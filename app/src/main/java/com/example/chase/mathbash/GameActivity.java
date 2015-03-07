@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.R.*;
 
 
+
 public class GameActivity extends ActionBarActivity {
 
     private LocationTimedProblemList tpl;
@@ -39,7 +40,7 @@ public class GameActivity extends ActionBarActivity {
     private int width;
     private int height;
 
-    private final int MAX_PROBLEMS = 3; //Maximum problems on screen
+    private final int MAX_PROBLEMS = 5; //Maximum problems on screen
     private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
     private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
     private final int PROBLEM_DELAY = 100; //Time between problem creation, in milliseconds
@@ -121,13 +122,13 @@ public class GameActivity extends ActionBarActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
-        Double position = prob.life();
+        Double position = (2.0/3.0)*(double)height/prob.life();
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
         problem = (TextView) findViewById(problemIds[count]);
         problem.setText(p);
         problem.setBackground(shape);
         problem.setX(width/prob.getX());
-        problem.setY( (float)((2*height/3)*prob.life()));
+        problem.setY( (float) (position + (height/3)));
     }
 
     @Override
