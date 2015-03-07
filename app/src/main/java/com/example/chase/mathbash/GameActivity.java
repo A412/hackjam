@@ -1,6 +1,9 @@
 package com.example.chase.mathbash;
 
+import android.annotation.TargetApi;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextWatcher;
 import android.text.Editable;
 import android.support.v7.app.ActionBarActivity;
@@ -26,6 +29,7 @@ public class GameActivity extends ActionBarActivity {
     private int scoreInt;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +40,15 @@ public class GameActivity extends ActionBarActivity {
         problem = (TextView) findViewById(R.id.problem);
 
         tpl = new TimedProblemList(10);
-        problem.setText(tpl.getProblem().toString());
+        //problem.setText(tpl.getProblem().toString());
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
                 tpl.decrementAll(0.003);
-                problem.setText(tpl.getProblemsAsString());
+                drawProblem(tpl);
                 h.postDelayed(this, 100);
             }
         }, 0);
@@ -69,6 +74,7 @@ public class GameActivity extends ActionBarActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void drawProblem(TimedProblemList tpl){
         for (Problem p : tpl) {
             TimedProblem tp = (TimedProblem)p;
