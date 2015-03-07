@@ -13,6 +13,12 @@ public class LocationTimedProblem extends TimedProblem {
         y = 100;
     }
 
+    public LocationTimedProblem(String q, int a, double initLife) {
+        super(q, a, initLife);
+        x = (int)(5*Math.random());
+        y = 100;
+    }
+
     public int getY(){
         return y;
     }
@@ -21,5 +27,18 @@ public class LocationTimedProblem extends TimedProblem {
         return x;
     }
 
-
+    public static LocationTimedProblem generate() {
+        String operation;
+        int ans;
+        int first = (int)(10 * Math.random());
+        int second = (int)(10 * Math.random());
+        if (Math.random() > 0.5) {
+            operation = " + ";
+            ans = first + second;
+        } else {
+            operation = " * ";
+            ans = first * second;
+        }
+        return new LocationTimedProblem(first + operation + second, ans, 1);
+    }
 }
