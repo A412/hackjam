@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -28,6 +29,8 @@ public class GameActivity extends ActionBarActivity {
     private LocationTimedProblemList tpl;
     private EditText answer;
     private TextView score;
+    private ProgressBar lifeForce;
+    private int health;
     private int scoreInt;
     private int width;
     private int height;
@@ -39,6 +42,7 @@ public class GameActivity extends ActionBarActivity {
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
+    private final int ANSWER_YPOS= height/3;
 
 
 
@@ -53,9 +57,12 @@ public class GameActivity extends ActionBarActivity {
         width = windowSize.x;
         height = windowSize.y;
 
+        //lifeForce=(ProgressBar)findViewById(R.id.lifeForce);
         score = (TextView) findViewById(R.id.score);
         answer = (EditText) findViewById(R.id.answer);
-        answer.setY(height/3);
+
+        answer.setY(ANSWER_YPOS);
+        health=100;
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         tpl.addProblem(MAX_PROBLEMS);
@@ -73,6 +80,7 @@ public class GameActivity extends ActionBarActivity {
             @Override
             public void run() {
                 tpl.decrementAll((double)(TIMER_INTERVAL) / PROBLEM_LIFETIME);
+                //updateProblems(tpl);
                 drawAllProblems(tpl);
                 count += TIMER_INTERVAL;
                 if (count > PROBLEM_DELAY) {
@@ -118,10 +126,16 @@ public class GameActivity extends ActionBarActivity {
     public void drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
+        float ypos=(float)(height-(float)(height * prob.life()));
+        if (ypos>=ANSWER_YPOS){
+            health-=10;
+            //remove the Location
+            return;
+        }
         problems[count].setText(p);
         problems[count].setBackground(shape);
         problems[count].setX((float)(prob.getX() * width * 1.2 / 5.0));
-        problems[count].setY((height-(float)(height * prob.life())));
+        problems[count].setY(ypos);
     }
 
     @Override
