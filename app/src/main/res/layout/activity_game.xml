@@ -91,14 +91,4 @@
         android:layout_marginTop="7dip"
         />
 
-    <ProgressBar
-        style="@android:style/Widget.ProgressBar.Small.Inverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lifeForce"
-        android:layout_below= "@+id/score"
-        android:layout_centerHorizontal="true"
-        />
-
-
 </RelativeLayout>
