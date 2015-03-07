@@ -61,6 +61,7 @@ public class GameActivity extends ActionBarActivity {
         score = (TextView) findViewById(R.id.score);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
+        tpl.addProblem(MAX_PROBLEMS);
         problems = new TextView[MAX_PROBLEMS];
         for (int i = 0; i < problems.length; i++) {
             problems[i] = (TextView) findViewById(problemIds[i]);
@@ -75,7 +76,7 @@ public class GameActivity extends ActionBarActivity {
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
-                tpl.decrementAll(TIMER_INTERVAL / PROBLEM_LIFETIME);
+                tpl.decrementAll((double)(TIMER_INTERVAL) / PROBLEM_LIFETIME);
                 drawAllProblems(tpl);
                 count += TIMER_INTERVAL;
                 if (count > PROBLEM_DELAY) {
@@ -120,11 +121,10 @@ public class GameActivity extends ActionBarActivity {
     public void drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
-
         problems[count].setText(p);
         problems[count].setBackground(shape);
-        problems[count].setX(width/prob.getX());
-        problems[count].setY((float)(height * prob.life()));
+        problems[count].setX((float) (width*prob.getX()/5.0));
+        problems[count].setY((height-(float)(height * prob.life())));
     }
 
     @Override
