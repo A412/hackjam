@@ -47,7 +47,15 @@ public class ProblemList implements Iterable<Problem>{
   }
 
   public void addProblem(Problem p) {
-      problems.add(p);
+    problems.add(p);
+  }
+
+  public boolean addProblem(int max) {
+    if (problems.size() < max) {
+        addProblem();
+        return true;
+    }
+    return false;
   }
 
   public boolean check(int ans) {
@@ -58,12 +66,6 @@ public class ProblemList implements Iterable<Problem>{
             onCorrectAnswer();
             correct = true;
         }
-    }
-    if (problems.size() < maxProblems()) {
-        addProblem();
-    }
-    if (problems.size() < maxProblems()) {
-        addProblem();
     }
     return correct;
   }
