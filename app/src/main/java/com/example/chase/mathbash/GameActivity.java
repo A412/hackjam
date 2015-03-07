@@ -28,7 +28,10 @@ public class GameActivity extends ActionBarActivity {
     private TextView problem;
     private int scoreInt;
 
-
+    private final int MAX_PROBLEMS = 5; //Maximum problems on screen
+    private final int TIMER_INTERVAL = 100; //Time between updates in milliseconds
+    private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
+    private final int PROBLEM_DELAY = 1000; //Time between problem creation, in milliseconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +47,19 @@ public class GameActivity extends ActionBarActivity {
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
+
+            int count = 0;
+
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
-                tpl.decrementAll(0.003);
+                tpl.decrementAll(TIMER_INTERVAL / PROBLEM_LIFETIME);
                 drawProblem(tpl);
-                h.postDelayed(this, 100);
+                count += TIMER_INTERVAL;
+                if (count > PROBLEM_DELAY) {
+                    tpl.addProblem(MAX_PROBLEMS);
+                }
+                h.postDelayed(this, TIMER_INTERVAL);
             }
         }, 0);
         answer.addTextChangedListener(new TextWatcher() {
