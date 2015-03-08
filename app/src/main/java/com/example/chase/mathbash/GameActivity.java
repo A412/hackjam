@@ -128,8 +128,6 @@ public class GameActivity extends ActionBarActivity {
 
 
     public void endGame(){
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        startActivity(intent);
         this.finish();
     }
 
@@ -174,7 +172,7 @@ public class GameActivity extends ActionBarActivity {
     public void decrementHealth(){
         health-=10;
         if (health<=0){
-            endGame();
+              endGame();
         }
         drawHealth();
     }
