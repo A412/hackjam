@@ -11,7 +11,5 @@
     <string name="problem3">0</string>
     <string name="problem4">0</string>
     <string name="problem5">0</string>
-    <string name="health">100</string>
-    <string name="lifeForce">100</string>
-
+    <string name="health_bar">100</string>
 </resources>

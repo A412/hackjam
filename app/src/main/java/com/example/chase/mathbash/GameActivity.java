@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -32,7 +33,7 @@ public class GameActivity extends ActionBarActivity {
     private LocationTimedProblemList tpl;
     private EditText answer;
     private TextView score;
-    private HealthBar healthBar;
+
     private int health;
     private int scoreInt;
     private int width;
@@ -67,7 +68,9 @@ public class GameActivity extends ActionBarActivity {
 
         answer.setY(ANSWER_YPOS);
         health=100;
-        healthBar=new HealthBar(this, height, width);
+
+
+
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         tpl.addProblem(MAX_PROBLEMS);
 
@@ -80,7 +83,6 @@ public class GameActivity extends ActionBarActivity {
 
 
 
-        healthBar.setHealth(health);
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
@@ -171,13 +173,14 @@ public class GameActivity extends ActionBarActivity {
         if (health<=0){
             endGame();
         }
-        healthBar.setHealth(health);
+        drawHealth();
+
     }
 
     public void incrementHealth() {
         if (health < 100) {
             health += 1;
-            healthBar.setHealth(health);
+            drawHealth();
         }
     }
 
@@ -197,7 +200,11 @@ public class GameActivity extends ActionBarActivity {
     }
 
     public void drawHealth(){
-        float life=(float)(health)/100;
+        Drawable backgroundBar = getResources().getDrawable(R.drawable.background_bar);
+
+        Drawable healthBar = getResources().getDrawable(R.drawable.health_bar);
+        healthBar.setBounds(0, height, width, 30);
+
 
     }
 }
