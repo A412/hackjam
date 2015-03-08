@@ -48,7 +48,7 @@ public class GameActivity extends ActionBarActivity {
     private TextView[] problems;
     private int ANSWER_YPOS;
 
-
+    private ProgressBar progress;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     @Override
@@ -62,14 +62,17 @@ public class GameActivity extends ActionBarActivity {
         height = windowSize.y;
         ANSWER_YPOS=height/3;
 
+        health=100;
+
+        progress = (ProgressBar) findViewById(R.id.healthBar);
+
+        progress.setProgress(health);
+
         //lifeForce=(ProgressBar)findViewById(R.id.lifeForce);
         score = (TextView) findViewById(R.id.score);
         answer = (EditText) findViewById(R.id.answer);
 
         answer.setY(ANSWER_YPOS);
-        health=100;
-
-
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         tpl.addProblem(MAX_PROBLEMS);
@@ -108,7 +111,6 @@ public class GameActivity extends ActionBarActivity {
                     answer.setText("");
                     scoreInt += PROBLEM_SCORE_MINIMUM;
                     score.setText("Score: " + scoreInt);
-
                 }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
@@ -128,6 +130,7 @@ public class GameActivity extends ActionBarActivity {
     public void endGame(){
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -174,14 +177,13 @@ public class GameActivity extends ActionBarActivity {
             endGame();
         }
         drawHealth();
-
     }
 
     public void incrementHealth() {
         if (health < 100) {
             health += 1;
-            drawHealth();
         }
+        drawHealth();
     }
 
     @Override
@@ -200,11 +202,6 @@ public class GameActivity extends ActionBarActivity {
     }
 
     public void drawHealth(){
-        Drawable backgroundBar = getResources().getDrawable(R.drawable.background_bar);
-
-        Drawable healthBar = getResources().getDrawable(R.drawable.health_bar);
-        healthBar.setBounds(0, height, width, 30);
-
-
+        progress.setProgress(health);
     }
 }

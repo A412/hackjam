@@ -10,7 +10,6 @@ import android.view.View;
 
 public class MainMenuActivity extends ActionBarActivity {
 
-
     public void startGame(View view){
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);

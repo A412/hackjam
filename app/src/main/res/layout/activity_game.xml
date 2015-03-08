@@ -106,6 +106,13 @@
         android:layout_marginTop="7dip"
         />
 
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="120dp"
+        android:layout_height="15dp"
+        android:id="@+id/healthBar"
+        android:layout_alignTop="@+id/problem1"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
