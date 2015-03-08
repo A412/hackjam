@@ -1,5 +1,6 @@
 package com.example.chase.mathbash;
 
+import android.app.DialogFragment;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,7 @@ import java.util.TimerTask;
 import android.os.Handler;
 import android.R.*;
 
-public class GameActivity extends ActionBarActivity {
+public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDialogListener{
 
     private LocationTimedProblemList tpl;
     private EditText answer;
@@ -40,9 +41,9 @@ public class GameActivity extends ActionBarActivity {
     private int height;
 
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
-    private final int TIMER_INTERVAL = 20; //Time between updates in milliseconds
-    private final int PROBLEM_LIFETIME = 20000; //Time that problems are on screen, in milliseconds
-    private final int PROBLEM_DELAY = 350; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
+    private final int TIMER_INTERVAL = 33; //Time between updates in milliseconds
+    private final int PROBLEM_LIFETIME = 1000; //Time that problems are on screen, in milliseconds
+    private final int PROBLEM_DELAY = 500; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
@@ -114,6 +115,10 @@ public class GameActivity extends ActionBarActivity {
         });
     }
 
+    public void onDialogPositiveClick(DialogFragment d) {
+        endGame();
+    }
+
     public boolean getAnswer(EditText answer){
         try {
             return tpl.check(answer.getText().toString());
@@ -165,10 +170,15 @@ public class GameActivity extends ActionBarActivity {
         return true;
     }
 
+    private boolean isShowingDialog = false;
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void decrementHealth(){
         health-=10;
-        if (health<=0){
-              endGame();
+        if (health<=0 && !isShowingDialog){
+            isShowingDialog = true;
+            DialogFragment d = new LoseDialog();
+            d.show(getFragmentManager(), "lose");
         }
         drawHealth();
     }

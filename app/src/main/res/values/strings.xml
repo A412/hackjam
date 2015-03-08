@@ -11,4 +11,8 @@
     <string name="problem3">0</string>
     <string name="problem4">0</string>
     <string name="problem5">0</string>
+    <string name="health_bar">100</string>
+    <string name="lose">You lose</string>
+    <string name="lose_title">Game over</string>
+    <string name="ok">OK</string>
 </resources>
