@@ -26,7 +26,6 @@
         android:text="@string/title_activity_game"
         android:id="@+id/math_title"
         android:textSize="50sp"
-        android:textSize="75sp"
         android:textAlignment="center"
         android:textColor="#458B00"
         android:singleLine="true"
