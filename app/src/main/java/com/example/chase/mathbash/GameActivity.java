@@ -28,6 +28,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 import android.R.*;
+import android.R.id.*;
+import android.R;
 
 public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDialogListener{
 

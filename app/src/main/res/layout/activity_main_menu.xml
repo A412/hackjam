@@ -20,14 +20,15 @@
         android:clickable="true" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_activity_game"
         android:id="@+id/math_title"
-        android:textSize="75dp"
+        android:setSize="75sp"
         android:textAlignment="center"
-        android:textColor="#ff2200cc"
+        android:textColor="#458B00"
+        android:singleLine="true"
         android:textStyle="italic"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false" />
