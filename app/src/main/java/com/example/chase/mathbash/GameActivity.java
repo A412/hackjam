@@ -3,12 +3,14 @@ package com.example.chase.mathbash;
 import android.app.DialogFragment;
 import android.annotation.TargetApi;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextWatcher;
 import android.text.Editable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import android.os.Handler;
 
 public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDialogListener{
