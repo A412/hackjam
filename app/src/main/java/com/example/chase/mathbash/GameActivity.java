@@ -65,10 +65,9 @@ public class GameActivity extends ActionBarActivity {
         health=100;
 
         progress = (ProgressBar) findViewById(R.id.healthBar);
-
         progress.setProgress(health);
 
-        //lifeForce=(ProgressBar)findViewById(R.id.lifeForce);
+
         score = (TextView) findViewById(R.id.score);
         answer = (EditText) findViewById(R.id.answer);
 
@@ -83,9 +82,6 @@ public class GameActivity extends ActionBarActivity {
             problems[i].setVisibility(View.INVISIBLE);
 
         }
-
-
-
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
@@ -127,7 +123,7 @@ public class GameActivity extends ActionBarActivity {
     }
 
 
-    public void endGame(){
+    public void endGame() {
         this.finish();
     }
 
@@ -151,7 +147,7 @@ public class GameActivity extends ActionBarActivity {
         problems[count].setBackground(shape);
         problems[count].setVisibility(View.VISIBLE);
         problems[count].setX((float)((prob.getX() + 0.5) * width/7.0));
-        problems[count].setY((height-(float)(height * prob.life())));
+        problems[count].setY(ypos);
 
         if (ypos>=ANSWER_YPOS){
             decrementHealth();
@@ -190,12 +186,10 @@ public class GameActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
