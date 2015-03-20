@@ -32,14 +32,15 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
     private final int TIMER_INTERVAL = 33; //Time between updates in milliseconds
     private final int PROBLEM_LIFETIME = 1000; //Time that problems are on screen, in milliseconds
-    private int PROBLEM_DELAY = 2000; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
+    private int problem_delay = 2000; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
     private final int PROBLEM_SCORE = 10; //Score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
     private ProgressBar progress;
-    private final double DECREMENT = (double)(TIMER_INTERVAL)/PROBLEM_LIFETIME;
-    private double SPEED;
-    private int PROBLEM_HEIGHT=16;
+    private final double decrement = (double)(TIMER_INTERVAL)/PROBLEM_LIFETIME;
+    private double speed;
+    private final int PROBLEM_HEIGHT=16;
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,18 +76,18 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
 
         final Handler h = new Handler();
         h.postDelayed( new Runnable() {
-            int count = PROBLEM_DELAY;
+            int count = problem_delay;
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
-                tpl.decrementAll(DECREMENT);
-                SPEED=height/DECREMENT;
-                PROBLEM_DELAY=(int) SPEED/PROBLEM_HEIGHT;
+                tpl.decrementAll(decrement);
+                speed=height/decrement;
+                problem_delay = (int) speed/PROBLEM_HEIGHT;
                 LocationTimedProblemList.updateProblems(tpl);
                 drawAllProblems(tpl);
 
                 count += TIMER_INTERVAL;
-                if (count >= PROBLEM_DELAY && tpl.addProblem(MAX_PROBLEMS)) {
+                if (count >= problem_delay && tpl.addProblem(MAX_PROBLEMS)) {
                     count = 0;
                 }
                 h.postDelayed(this, TIMER_INTERVAL);
@@ -105,6 +106,7 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
     }
+
 
     public void onDialogPositiveClick(DialogFragment d) {
         endGame();
