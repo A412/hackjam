@@ -27,20 +27,15 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
     private EditText answer;
     private TextView score;
 
-    private int health;
-    private int scoreInt;
-    private int width;
-    private int height;
+    private int health, scoreInt, width, height, answer_ypos;
 
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
-    private final int TIMER_INTERVAL =33; //Time between updates in milliseconds
-    private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
+    private final int TIMER_INTERVAL = 33; //Time between updates in milliseconds
+    private final int PROBLEM_LIFETIME = 1000; //Time that problems are on screen, in milliseconds
     private final int PROBLEM_DELAY = 500; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
-    private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
+    private final int PROBLEM_SCORE = 10; //Score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
-    private int ANSWER_YPOS;
-
     private ProgressBar progress;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -53,9 +48,9 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
         getWindowManager().getDefaultDisplay().getSize(windowSize);
         width = windowSize.x;
         height = windowSize.y;
-        ANSWER_YPOS=height/3;
+        answer_ypos = height / 3 ;
 
-        health=100;
+        health = 100;
 
         progress = (ProgressBar) findViewById(R.id.healthBar);
         progress.setProgress(health);
@@ -64,7 +59,7 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
         score = (TextView) findViewById(R.id.score);
         answer = (EditText) findViewById(R.id.answer);
 
-        answer.setY(ANSWER_YPOS);
+        answer.setY(answer_ypos);
 
         tpl = new LocationTimedProblemList(MAX_PROBLEMS);
         tpl.addProblem(MAX_PROBLEMS);
@@ -98,7 +93,7 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
                 if (getAnswer(answer)) {
                     incrementHealth();
                     answer.setText("");
-                    scoreInt += PROBLEM_SCORE_MINIMUM;
+                    scoreInt += PROBLEM_SCORE;
                     score.setText("Score: " + scoreInt);
                 }
             }
@@ -146,7 +141,7 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
         problems[count].setX((float)((prob.getX() + 0.5) * width/7.0));
         problems[count].setY(ypos);
 
-        if (ypos>=ANSWER_YPOS){
+        if (ypos>=answer_ypos){
             decrementHealth();
             prob=tpl.removeReplace(count);
             drawProblem(prob, count);
@@ -197,5 +192,9 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
 
     public void drawHealth(){
         progress.setProgress(health);
+    }
+
+    public String getLoseDialogMessage() {
+        return "Your score was: " + scoreInt;
     }
 }

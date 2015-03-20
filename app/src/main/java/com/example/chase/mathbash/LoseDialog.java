@@ -13,20 +13,24 @@ import android.app.Activity;
 public class LoseDialog extends DialogFragment {
 
     public interface LoseDialogListener {
+        public String getLoseDialogMessage();
         public void onDialogPositiveClick(DialogFragment d);
     }
 
     public LoseDialogListener ldl;
 
+    private String scoreMessage;
+
     public void onAttach(Activity ac) {
         super.onAttach(ac);
         ldl = (LoseDialogListener) ac;
+        scoreMessage = ((LoseDialogListener) ac).getLoseDialogMessage();
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.lose).setTitle(R.string.lose_title).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setMessage(scoreMessage).setTitle(R.string.lose_title).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ldl.onDialogPositiveClick(LoseDialog.this);
