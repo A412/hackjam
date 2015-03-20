@@ -45,6 +45,5 @@ public class MainMenuActivity extends ActionBarActivity {
 
     public boolean openSettings(){
         return true;
-
     }
 }
