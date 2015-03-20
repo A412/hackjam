@@ -19,19 +19,17 @@
         android:visibility="visible"
         android:enabled="true"
         android:clickable="true"
-        android:theme="@style/Base.TextAppearance.AppCompat.Button"
         android:elegantTextHeight="true"
-        android:backgroundTintMode="screen"
-        android:textAppearance="@color/abc_secondary_text_material_dark" />
+ />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_activity_game"
         android:id="@+id/math_title"
         android:textSize="@dimen/abc_text_size_display_3_material"
         android:textAlignment="center"
+        android:background="#FFFFFF"
         android:textColor="#458B00"
         android:singleLine="true"
         android:textStyle="italic"

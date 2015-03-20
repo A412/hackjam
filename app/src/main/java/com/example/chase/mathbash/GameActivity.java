@@ -32,12 +32,14 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
     private final int TIMER_INTERVAL = 33; //Time between updates in milliseconds
     private final int PROBLEM_LIFETIME = 1000; //Time that problems are on screen, in milliseconds
-    private final int PROBLEM_DELAY = 500; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
+    private int PROBLEM_DELAY = 2000; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
     private final int PROBLEM_SCORE = 10; //Score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
     private TextView[] problems;
     private ProgressBar progress;
-
+    private final double DECREMENT = (double)(TIMER_INTERVAL)/PROBLEM_LIFETIME;
+    private double SPEED;
+    private int PROBLEM_HEIGHT=16;
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,9 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
-                tpl.decrementAll((double)(TIMER_INTERVAL) / PROBLEM_LIFETIME);
+                tpl.decrementAll(DECREMENT);
+                SPEED=height/DECREMENT;
+                PROBLEM_DELAY=(int) SPEED/PROBLEM_HEIGHT;
                 LocationTimedProblemList.updateProblems(tpl);
                 drawAllProblems(tpl);
 
@@ -134,7 +138,7 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
     public boolean drawProblem(LocationTimedProblem prob, int count){
         String p = prob.toString().split(",")[0];
         Drawable shape = getResources().getDrawable(R.drawable.gradient_box);
-        float ypos=(float)(height-(float)(height * prob.life()));
+        float ypos=(height-(float)(height * prob.life()));
         problems[count].setText(p);
         problems[count].setBackground(shape);
         problems[count].setVisibility(View.VISIBLE);
