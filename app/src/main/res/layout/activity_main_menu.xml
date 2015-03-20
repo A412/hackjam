@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:windowSoftInputMode="stateAlwaysVisible"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainMenuActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainMenuActivity"
+    android:background="@mipmap/numbers_background">
 
     <Button
         android:id="@+id/start_button"
@@ -17,7 +18,11 @@
         android:layout_marginBottom="75dp"
         android:visibility="visible"
         android:enabled="true"
-        android:clickable="true" />
+        android:clickable="true"
+        android:theme="@style/Base.TextAppearance.AppCompat.Button"
+        android:elegantTextHeight="true"
+        android:backgroundTintMode="screen"
+        android:textAppearance="@color/abc_secondary_text_material_dark" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -25,12 +30,16 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_activity_game"
         android:id="@+id/math_title"
-        android:textSize="50sp"
+        android:textSize="@dimen/abc_text_size_display_3_material"
         android:textAlignment="center"
         android:textColor="#458B00"
         android:singleLine="true"
         android:textStyle="italic"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="123dp"
+        android:elegantTextHeight="true"
+        android:gravity="center_horizontal"
+        android:height="@dimen/abc_action_bar_progress_bar_size"
+        android:capitalize="characters" />
 
 </RelativeLayout>

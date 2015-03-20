@@ -37,8 +37,14 @@ public class MainMenuActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //openSettings();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean openSettings(){
+        return true;
+
     }
 }

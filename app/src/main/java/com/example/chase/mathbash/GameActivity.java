@@ -33,8 +33,8 @@ public class GameActivity extends ActionBarActivity implements LoseDialog.LoseDi
     private int height;
 
     private final int MAX_PROBLEMS = 5; //Maximum problems on screen
-    private final int TIMER_INTERVAL = 33; //Time between updates in milliseconds
-    private final int PROBLEM_LIFETIME = 1000; //Time that problems are on screen, in milliseconds
+    private final int TIMER_INTERVAL =33; //Time between updates in milliseconds
+    private final int PROBLEM_LIFETIME = 10000; //Time that problems are on screen, in milliseconds
     private final int PROBLEM_DELAY = 500; //Time between problem creation, in milliseconds //Currently causes bugs if not 0
     private final int PROBLEM_SCORE_MINIMUM = 10; //Minimum score per problem
     private int[] problemIds = {R.id.problem1, R.id.problem2, R.id.problem3, R.id.problem4, R.id.problem5};
